@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-double mysin(double x, int N);
+double mysin(double x, int N); // declaration
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
     return 0;
 }
 
-double mysin(double x, int N)
+double mysin(double x, int N) // implementation
 {
     return 0;
 }
