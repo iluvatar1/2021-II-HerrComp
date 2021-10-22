@@ -26,7 +26,7 @@ REAL sumup(int N)
 REAL sumdown(int N)
 {
     REAL suma = 0;
-    for(int ii = N; ii >= 1; ++ii) {
+    for(int ii = N; ii >= 1; --ii) {
         suma += 1/ii;
     }
     return suma;
