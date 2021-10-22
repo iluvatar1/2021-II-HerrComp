@@ -1,10 +1,13 @@
-# $< : La priemra dependencia
+# $< : La primera dependencia
 # $@: target
 
 sumas.x: sumas.cpp
-	g++ $< -o $@
-restas.x: restas.cpp
+
+%.x: %.cpp
 	g++ $< -o $@
 
+datos.txt: sumas.x
+	./$< > $@
+
 clean:
-	rm -f a.out *.x
+	rm -f a.out *.x *.txt
