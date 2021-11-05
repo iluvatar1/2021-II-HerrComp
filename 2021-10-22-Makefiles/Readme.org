@@ -1,0 +1,13 @@
+* Makefile: Crear una figura en pdf [2/4]
+La figura debe mostrar la diferencia porcentual entre sumar hacia arriba y sumar
+hacia abajo una serie armónica.
+- [X] Crear el archivo basico que tiene las sumas
+- [X] Crear un makefile
+  - [X] Compilar y crear el ejecutable
+  - [X] limpiar el directorio
+- [ ] Crear un archivo de datos para imprimir
+  - [ ] Crear un target en el makefile que cree los datos
+- [ ] Dibujar en gnuplot:
+  - [ ] Directamente desde gnuplot
+  - [ ] Escribir script de gnuplot con las instrucciones
+  - [ ] Crear un nuevo target en e;l makefile, para crear la figura en pdf

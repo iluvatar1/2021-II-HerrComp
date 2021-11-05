@@ -2,12 +2,12 @@
 
 Examples at    https://bitbucket.org/iluvatar/scientific-computing-part-01/get/master.tar.bz2
 
-- [ ] Check gdb on emacs console
-- [ ] Check gdb online : https://www.onlinegdb.com/
-- [ ] Make them try their own ide.
-- [ ] Use ddd for array plotting. Use debugging-examples/basic_gdb/array.cpp
-- [ ] Show use of sanitizers
-- [ ] Run valgrind to detect memory errors:
+- [X] Check gdb on emacs console
+- [X] Check gdb online : https://www.onlinegdb.com/
+- [X] Make them try their own ide.
+- [X] Use ddd for array plotting. Use debugging-examples/basic_gdb/array.cpp
+- [X] Show use of sanitizers
+- [X] Run valgrind to detect memory errors:
   #+begin_src shell
 valgrind --tool=memcheck --leak-check=yes myprog arg1 arg2
   #+end_src
