@@ -14,7 +14,7 @@ int main(void)
     std::cout.precision(6);
     std::cout.setf(std::ios::scientific);
 
-    for(int ii = 1; ii < 1000; ++ii) {
+    for(int ii = 1; ii < 10000; ++ii) {
         REAL suma1 = sumup(ii);
         REAL suma2 = sumdown(ii);
         std::cout << ii << "\t" << std::fabs(1 - suma1/suma2) << "\n";
