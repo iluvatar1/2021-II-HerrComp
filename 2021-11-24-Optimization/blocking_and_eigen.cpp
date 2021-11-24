@@ -16,7 +16,7 @@ bool verify_transpose(T & m1, U & m2, int n);
 
 int main(){
     const int n = 12000;
-    const int csize = 32;
+    const int csize = 8;
     float **a, **b;
     clock_t cputime1, cputime2;
     int i,j,k,ii,jj,kk;
@@ -66,14 +66,15 @@ int main(){
             for (i=ii; i<min(n,ii+csize-1); ++i)
                 for (j=jj; j<min(n,jj+csize-1); ++j)
                     a[i][j] = b[j][i];
+    assert(verify_transpose(a, b, n));
     cputime2 = clock() - cputime1;
     std::printf("Time for blocked transposition: %f\n", ((double)cputime2)/CLOCKS_PER_SEC);
-    assert(verify_transpose(a, b, n));
 
     // eigen
     cputime1 = clock();
     //M1.noalias() = M2.transpose();
     auto M1{M2.transpose()};
+    assert(verify_transpose(M1, M2, n));
     cputime2 = clock() - cputime1;
     std::printf("Time for transposition with eigen: %f\n", ((double)cputime2)/CLOCKS_PER_SEC);
     cputime1 = clock();

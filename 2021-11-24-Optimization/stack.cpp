@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    const int M = 7000;
+    const int M = 700;
     const int N = 500;
     double data[M][N] = {{0.0}};
 
