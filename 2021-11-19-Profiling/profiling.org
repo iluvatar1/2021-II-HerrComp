@@ -69,8 +69,8 @@ good practice and it is useful for a code to report the time spent
 on different parts. The following example is extracted from
 [[https://github.com/thehackerwithin/PyTrieste/tree/master/valgrind][here]] and modified to make it a bit simpler:
 #+begin_src cpp :tangle cache.cpp
-#include <cstdio>
-#include <cstdlib>
+#include <cstdio>  // printf
+#include <cstdlib> // atoi , atof
 
 /*
    Tests cache misses.
@@ -82,24 +82,24 @@ int main(int argc, char **argv)
     printf("Usage: cacheTest sizeI sizeJ\nIn first input.\n");
     return 1;
   }
-  long sI = atoi(argv[1]);
-  long sJ = atoi(argv[2]);
+  long sI = atoi(argv[1]); // nrows
+  long sJ = atoi(argv[2]); // ncolumns
 
   printf("Operating on matrix of size %ld by %ld\n", sI, sJ);
 
   long *arr = new long[sI*sJ]; // double array.
 
-  // option 1
+  // option 1 : varian mas rapido las columnas
   for (long i=0; i < sI; ++i)
     for (long j=0; j < sJ; ++j)
       arr[(i * (sJ)) + j ] = i;
   
-  // option 2
+  // option 2 : varian mas rapidos las filas
   for (long i=0; i < sI; ++i)
       for (long j=0; j < sJ; ++j)
          arr[(j * (sI)) + i ] = i;
 
-  // option 3
+  // option 3 : lo recorre linealmente
   for (int i=0; i < sI*sJ; ++i) arr[i] = i;
 
   printf("%ld\n", arr[0]);
@@ -198,9 +198,9 @@ void option3(long * data, long isize, long jsize)
 ** gprof
 All we have to do are three basic steps detailed as follows:
 
-1. Compiling and linking your program with profiling enabled
+1. Compiling and linking your program with profiling enabled ~-g -pg~
 2. Executing your program (this generates the profile information as
-   well)
+   well). Creates a file: =gmon.out=
 3. Using gprof to analyze the generated profile data.
 
 We are going to understand how gprof works by using the same code as before and
@@ -214,7 +214,7 @@ As usual, to compile our code (written in C language) we use gcc, but we
 must add the -pg flag, so it must look similar to:
 
 #+begin_src shell
-  gcc -Wall -pg test_gprof.c -o test_gprof
+  gcc -Wall -g -pg test_gprof.c -o test_gprof
 #+end_src
 
 The -pg flag (this is the one relevant for profiling) just tells the
