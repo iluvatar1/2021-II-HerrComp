@@ -34,9 +34,11 @@ void fill_data(double *a, int size)
 double average(double *a, int size)
 {
     double result = 0;
-#pragma omp parallel for reduction(+:result)
+//#pragma omp parallel for reduction(+:result)
+#pragma omp parallel for
     for(int ii = 0; ii < size; ++ii) {
-        result += a[ii];
+      #pragma omp atomic
+      result = result + a[ii];
     }
     result /= size;
     return result;

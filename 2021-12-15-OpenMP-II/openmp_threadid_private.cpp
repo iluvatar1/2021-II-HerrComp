@@ -11,7 +11,7 @@ int main(void)
                 thid, nth);
 
 //#pragma omp parallel num_threads(4)
-#pragma omp parallel private(thid, nth)
+#pragma omp parallel private(thid, nth) num_threads(4)
     {// se generan los threads
         thid = omp_get_thread_num();
         nth = omp_get_num_threads();
