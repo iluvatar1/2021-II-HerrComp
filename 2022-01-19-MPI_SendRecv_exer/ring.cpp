@@ -20,8 +20,8 @@ int main(int argc, char **argv)
   ring(NREPS, pid, np);
 
   MPI_Finalize(); /* Mandatory */
-  
-  return 0; 
+
+  return 0;
 }
 
 void ring(int nreps, int pid, int np)
@@ -50,7 +50,15 @@ void ring(int nreps, int pid, int np)
   if (pid == 0) {
     //std::cout << "totaltime: " << totaltime  << std::endl;
     //std::cout << "totaltime/nsteps: " << totaltime/nsteps  << std::endl;
-    std::cout << "bandwidth: " << 2.0*nreps*1*sizeof(double)/totaltime/1.0e9  << std::endl;
-    std::cout << "val: " << buf << std::endl;
+    std::cout << "0 bandwidth: " << 2.0*nreps*1*sizeof(double)/totaltime/1.0e9  << std::endl;
+    std::cout << "0 buf: " << buf << std::endl;
+    std::cout << "0 val1: " << val << std::endl;
+  }
+  if (pid == 1) {
+    //std::cout << "totaltime: " << totaltime  << std::endl;
+    //std::cout << "totaltime/nsteps: " << totaltime/nsteps  << std::endl;
+    std::cout << "1 bandwidth: " << 2.0*nreps*1*sizeof(double)/totaltime/1.0e9  << std::endl;
+    std::cout << "1 buf: " << buf << std::endl;
+    std::cout << "1 val: " << val << std::endl;
   }
 }
