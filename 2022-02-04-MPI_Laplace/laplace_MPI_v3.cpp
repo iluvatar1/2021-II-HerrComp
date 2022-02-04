@@ -196,7 +196,7 @@ void send_rows_non_blocking(Matrix & m, int nrows, int ncols, int pid, int np)
     MPI_Recv(&m[(nrows-1)*ncols], ncols, MPI_DOUBLE, pid+1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
   }
 
-  if (pid <- np-2) {
+  if (pid <= np-2) {
     MPI_Wait(&r1, MPI_STATUS_IGNORE);
   }
 
@@ -207,21 +207,21 @@ void send_rows_non_blocking(Matrix & m, int nrows, int ncols, int pid, int np)
 
 void send_rows_sendrecv(Matrix & m, int nrows, int ncols, int pid, int np)
 {
-  // send data forwards
   if (0 == pid) {
-    MPI_Send(&m[(nrows-2)*ncols], ncols, MPI_DOUBLE, pid+1, 0, MPI_COMM_WORLD);
+    MPI_Sendrecv(&m[(nrows-2)*ncols], ncols, MPI_DOUBLE, pid+1, 0,
+                 &m[(nrows-1)*ncols], ncols, MPI_DOUBLE, pid+1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
   }
   if (1 <= pid && pid <= np-2) {
+  // send data forwards
     MPI_Sendrecv(&m[(nrows-2)*ncols], ncols, MPI_DOUBLE, pid+1, 0,
                  &m[(0)*ncols], ncols, MPI_DOUBLE, pid-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-  }
   // send data backwards
+    MPI_Sendrecv(&m[(1)*ncols], ncols, MPI_DOUBLE, pid-1, 0,
+                 &m[(nrows-1)*ncols], ncols, MPI_DOUBLE, pid+1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);  }
+
   if (np-1 == pid) {
-    MPI_Send(&m[(1)*ncols], ncols, MPI_DOUBLE, pid-1, 1, MPI_COMM_WORLD);
-  }
-  if (1 <= pid && pid <= np-2) {
-    MPI_Sendrecv(&m[(1)*ncols], ncols, MPI_DOUBLE, pid-1, 1,
-                 &m[(nrows-1)*ncols], ncols, MPI_DOUBLE, pid+1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Sendrecv(&m[(1)*ncols], ncols, MPI_DOUBLE, pid-1, 0,
+                 &m[(0)*ncols], ncols, MPI_DOUBLE, pid-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
   }
 }
 
